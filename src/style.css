@@ -3,10 +3,30 @@ body {
     margin: 0;
     /* Error: bajo contraste — texto gris claro sobre fondo casi blanco */
     color: #bbb;
-    background: #f5f5f5;
+    background: #000000; /* Cambio el fondo a negro porque enrealidad no es usado este background en todo la página, al contrario del color de las letras*/
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
-.header {
+header { grid-area: header; }
+main   { grid-area: main; }
+footer { grid-area: footer; }
+
+h1, h2, h3 {
+    margin: 0 0 8px 0;
+}
+
+.skill-desc {
+    color: #bbb;
+    margin-top: 6px;
+}
+
+header {
     background: #1a1a2e;
     padding: 16px 40px;
     border-bottom: 3px solid #e94560;
@@ -19,17 +39,64 @@ body {
 }
 
 /* Error: sin flexbox, navegación con display inline-block */
+.nav-links {  /* Cambiado por el método donde utilizamos flexbox */
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .nav-links a {
-    display: inline-block;
-    margin-right: 20px;
     text-decoration: none;
     /* Error: muy bajo contraste sobre fondo oscuro */
-    color: #555;
+    color: #f9c0e4;     /* Cambiado por un color claro y contrastante*/
+}
+
+.hero-meta {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.hero-meta li {
+    margin-bottom: 6px;
 }
 
 .hero {
     padding: 60px 40px;
     background: #16213e;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.hero-bio {
+    margin-top: 16px;
+    max-width: 600px;
+}
+
+.hero-meta span {
+    color: #e94560;
+}
+
+.stat-card img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.skill-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.challenge-intro {
+    margin-bottom: 24px;
+    max-width: 600px;
 }
 
 .avatar {
@@ -45,15 +112,16 @@ body {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.85rem;
+    font-weight: bold;
     margin-top: 8px;
     /* Error: texto de badge también con bajo contraste */
-    color: #aaa;
+    color: #ffd3ec;     /* Cambiado por un color claro y contrastante */
 }
 
 .section-title {
     font-size: 1.8rem;
     /* Error: color de encabezado con bajo contraste */
-    color: #ccc;
+    color: #ffffff;
     margin-bottom: 24px;
     border-bottom: 2px solid #e94560;
     padding-bottom: 8px;
@@ -64,15 +132,13 @@ body {
     background: #0f3460;
 }
 
-/* Error: grilla de stats con float en lugar de CSS Grid */
 .stats-grid {
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
 }
 
 .stat-card {
-    float: left;
-    width: 22%;
-    margin: 1.5%;
     background: #16213e;
     border: 1px solid #e94560;
     padding: 20px;
@@ -92,7 +158,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     /* Error: bajo contraste */
-    color: #888;
+    color: #adecff;
 }
 
 .skills-section {
@@ -111,12 +177,15 @@ body {
 .skill-cost {
     font-size: 0.8rem;
     /* Error: bajo contraste */
-    color: #777;
+    color: #fbff28;
     margin-top: 4px;
 }
 
 .tags {
     margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 
 .tag {
@@ -134,6 +203,12 @@ body {
     background: #0f3460;
 }
 
+label {
+    display: block;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
 /* Error: campos sin estilos accesibles, sin indicador de foco visible */
 input, select {
     display: block;
@@ -148,6 +223,15 @@ input, select {
     border-radius: 4px;
 }
 
+input:focus, select:focus {
+    outline: 2px solid #e94560;
+    outline-offset: 2px;
+}
+
+input:hover, select:hover {
+    border-color: #ff7096;
+}
+
 /* Error: botón de envío como div, no como button */
 .btn {
     display: inline-block;
@@ -157,9 +241,10 @@ input, select {
     cursor: pointer;
     border-radius: 4px;
     font-size: 1rem;
+    border: none;
 }
 
-.footer {
+footer {
     background: #1a1a2e;
     color: #fff;
     text-align: center;
